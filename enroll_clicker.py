@@ -3,15 +3,22 @@ from pynput import keyboard
 import threading
 import time
 
+CLICK_INTERVAL = 0.2 # click interval in seconds REPLACE WITH YOUR DESIRED CLICK INTERVAL
+
 mouse = MouseController()
-coords = []
+Coord = tuple[int, int]
+coords: list[Coord] = []
 
-first_coord = (810, 703) # PUT HERE WHERE THE PROCEED TO STEP 2 BUTTON IS
-coords.append(first_coord)
+FIRST_COORD = (810, 703) # PUT HERE WHERE THE PROCEED TO STEP 2 BUTTON IS
+coords.append(FIRST_COORD)
 
-SECOND_OFFSET = (59, 51) # CALCULATE COORDINATES OF THE SECOND CLICK USING AN OFFSET
-second_coord = tuple(map(int, (first_coord[0] - SECOND_OFFSET[0], first_coord[1] - SECOND_OFFSET[1])))
-coords.append(second_coord)
+# This calculates the second click needed to finish enrolling (lowkenuinely haven't tested if it works on other devices
+SECOND_OFFSET = (59, 51)
+SECOND_COORD = (
+    FIRST_COORD[0] - SECOND_OFFSET[0],
+    FIRST_COORD[1] - SECOND_OFFSET[1]
+)
+coords.append(SECOND_COORD)
 
 other_coords = [(743, 606)] # ADD OTHER COORDINATES IF NECESSARY
 
@@ -35,7 +42,7 @@ def click_loop():
             # cycle to next coordinate
             i = (i + 1) % len(coords)
 
-            time.sleep(0.2)  # click interval (30ms)
+            time.sleep(CLICK_INTERVAL)  # click interval (30ms)
         else:
             time.sleep(0.05)
 
