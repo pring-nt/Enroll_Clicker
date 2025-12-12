@@ -36,7 +36,7 @@ python enroll_clicker.py
 2. Input the clicker interval (or none to default to 0.2) in the terminal.
 3. Press F10 to edit the coordinates you want your clicker to use.
 4. Either manually encode the coordinates using the option C, U, and D or you record the clicks using R.
-5. When choosing the record option do note that the previously saved coordinates will be overridden.
+5. When choosing the record option do note that the previously saved coordinates will be overwritten.
 6. Press the UP arrow to record a cursor coordinate, press the DOWN arrow to save, and press ESC to quit without saving.
 
 
