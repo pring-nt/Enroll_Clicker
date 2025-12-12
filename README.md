@@ -25,7 +25,8 @@ cd Enroll_Clicker
 
 Open `enroll_clicker.py` and set:
 
-- `FIRST_COORD` → coordinates of the enrollment button to click.
+- `FIRST_COORD` → coordinates of the enrollment button.
+- `SECOND_COORD` → coordinates of the finish enrollment button
 - `CLICK_INTERVAL` (optional) → seconds between clicks.
 - `other_coords` → any additional coordinates you want the script to click.
 

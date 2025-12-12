@@ -3,24 +3,31 @@ from pynput import keyboard
 import threading
 import time
 
-CLICK_INTERVAL = 0.2 # click interval in seconds REPLACE WITH YOUR DESIRED CLICK INTERVAL
+# REPLACE WITH YOUR DESIRED CLICK INTERVAL
+CLICK_INTERVAL = 0.2 # click interval in seconds
 
 mouse = MouseController()
 Coord = tuple[int, int]
 coords: list[Coord] = []
 
-FIRST_COORD = (810, 703) # PUT HERE WHERE THE PROCEED TO STEP 2 BUTTON IS
+# PUT HERE WHERE THE PROCEED TO STEP 2 BUTTON IS
+FIRST_COORD = (
+    774,
+    662
+)
 coords.append(FIRST_COORD)
 
-# This calculates the second click needed to finish enrolling (lowkenuinely haven't tested if it works on other devices
-SECOND_OFFSET = (59, 51)
+# PUT HERE WHERE THE FINISH ENROLLING BUTTON IS
 SECOND_COORD = (
-    FIRST_COORD[0] - SECOND_OFFSET[0],
-    FIRST_COORD[1] - SECOND_OFFSET[1]
+    750,
+    601
 )
 coords.append(SECOND_COORD)
 
-other_coords = [(743, 606)] # ADD OTHER COORDINATES IF NECESSARY
+# ADD OTHER COORDINATES IF NECESSARY
+other_coords = [
+    (733, 561)
+                ]
 
 for coord in other_coords:
     coords.append(coord)
