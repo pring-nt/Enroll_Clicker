@@ -8,7 +8,7 @@ def on_press(key):
 
     try:
         if key.char == 'a':  # when 'A' is pressed
-            print(f"aaaaa{m.position}")
+            print(f"{m.position}")
     except AttributeError:
         pass  # special keys don't have .char
 
