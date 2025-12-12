@@ -136,11 +136,11 @@ def edit_menu():
         show_table()
         print("--- Coordinate Editor ---")
         print("[C] Create new coordinate row")
-        print("[R] Record new coordinates with UP and DOWN (overwrites CSV)")
+        print("[R] Record new coordinates with LEFT and RIGHT click (overwrites CSV)")
         print("[U] Update existing row")
         print("[D] Delete row")
         print("[X] Exit editor")
-        choice = input("Choose an action (C/U/D/R/X): ").strip().upper()
+        choice = input("Choose an action (C/R/U/D/X): ").strip().upper()
 
         if choice not in ("C", "U", "D", "R", "X"):
             print("Invalid choice. Try again.")
