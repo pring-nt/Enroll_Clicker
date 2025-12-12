@@ -130,9 +130,9 @@ def edit_menu():
         show_table()
         print("--- Coordinate Editor ---")
         print("[C] Create new coordinate row")
+        print("[R] Record new coordinates with UP and DOWN (overwrites CSV)")
         print("[U] Update existing row")
         print("[D] Delete row")
-        print("[R] Record new coordinates with UP and DOWN (overwrites CSV)")
         print("[X] Exit editor")
         choice = input("Choose an action (C/U/D/R/X): ").strip().upper()
 
