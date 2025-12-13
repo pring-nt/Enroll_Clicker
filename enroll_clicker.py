@@ -51,7 +51,6 @@ def save_coords():
 
 # DISPLAY
 def show_table():
-    clear_screen()
     print("---- CURRENT COORDINATES ----")
     if not coords:
         print("(no coordinates configured)")
@@ -64,64 +63,63 @@ def show_table():
 # RECORD MODE (overwrites CSV after finish)
 def start_recording_mode():
     """
-    Press LEFT MOUSE BUTTON to record current cursor position.
-    Press RIGHT MOUSE BUTTON to finish and save (overwrites coords.csv).
-    Press ESC to cancel (no save).
+    LEFT CLICK  -> record coordinate
+    RIGHT CLICK -> finish & save
+    ESC         -> cancel immediately (no save)
     """
     global coords
 
-    # confirmation
     ans = input("WARNING: This will OVERWRITE coords.csv. Continue? (Y/N): ").strip().lower()
     if ans != "y":
         print("Recording cancelled.")
-        time.sleep(0.6)
         return
 
-    print("\nRecording mode: click LEFT mouse button to record position, RIGHT to finish and save, ESC to cancel.")
-    print("Recorded positions will replace the current coords.csv upon finishing.\n")
+    print("\nRecording mode:")
+    print("LEFT CLICK  -> record")
+    print("RIGHT CLICK -> finish & save")
+    print("ESC         -> cancel\n")
 
     recorded: list[tuple[int, int]] = []
     cancelled = False
 
-    # mouse listener
+    ml = None  # will hold mouse listener
+
     def on_click(x, y, button, pressed):
-        nonlocal recorded
-        if pressed:
-            if button == mouse.Button.left:
-                recorded.append((int(x), int(y)))
-                print(f"Recorded: ({x}, {y})")
-            elif button == mouse.Button.right:
-                # finish recording
-                return False  # stop listener
+        if not pressed:
+            return None
+
+        if button == mouse.Button.left:
+            recorded.append((int(x), int(y)))
+            print(f"Recorded: ({x}, {y})")
+
+        elif button == mouse.Button.right:
+            print("Finishing recording...")
+            return False  # stops mouse listener
         return None
 
-    # keyboard listener (for ESC cancel)
-    esc_pressed = False
-
     def on_press_key(key):
-        nonlocal cancelled, esc_pressed
+        nonlocal cancelled
         if key == keyboard.Key.esc:
-            print("Recording cancelled (ESC).")
             cancelled = True
-            esc_pressed = True
-            return False
+            print("Recording cancelled (ESC).")
+            if ml:
+                ml.stop()  # force mouse listener to stop
+            return False  # stop keyboard listener
+        return None
 
-    # run both listeners
     with keyboard.Listener(on_press=on_press_key) as kl:
-        with mouse.Listener(on_click=on_click) as ml:
-            ml.join()  # wait for mouse recording to finish
-        kl.stop()  # stop keyboard listener if not already
+        with mouse.Listener(on_click=on_click) as mouse_listener:
+            ml = mouse_listener
+            mouse_listener.join()
+        kl.stop()
 
     if cancelled or not recorded:
         print("No changes saved.")
-        time.sleep(0.6)
         return
 
-    # overwrite coords and save
     coords = recorded.copy()
     save_coords()
     print(f"Saved {len(coords)} recorded coordinates to {CSV_FILE}")
-    time.sleep(0.6)
 
 
 # EDIT MENU (C/U/D/R/X)
