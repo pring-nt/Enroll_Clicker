@@ -27,20 +27,20 @@ In the terminal go to the repo directory and run this command:
 pip install pynput
 ```
 
-### 3. Edit the clicker configuration
+### 3. Adjust the clicker configuration
 
 ```bash
 python enroll_clicker.py
 ```
-1. Run the clicker script
+1. Use the command above to run the clicker script
 2. Input the clicker interval (or none to default to 0.2) in the terminal.
 3. Press F10 to edit the coordinates you want your clicker to use.
-4. Either manually encode the coordinates using the option C, U, and D or you record the clicks using R.
-5. When choosing the record option do note that the previously saved coordinates will be overwritten.
-6. Press the LEFT click to record a cursor coordinate, press RIGHT click to save, and press ESC to quit without saving.
+4. Either manually input the coordinates using options 'C', 'U', and 'D' on the terminal or record your clicks using option 'R'.
+5. NOTE: option 'R' will overwrite the previously saved click coordinates.
+6. When recording clicks, press LEFT click to record a cursor coordinate, press RIGHT click to save, and press ESC to quit without saving.
 
 
-### 4. Run the clicker
+### 4. Using the clicker
 ```bash
 python enroll_clicker.py
 ```
